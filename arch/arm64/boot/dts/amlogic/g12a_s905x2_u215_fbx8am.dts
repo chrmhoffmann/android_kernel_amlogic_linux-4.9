@@ -1844,7 +1844,7 @@
 
 		ion_dev {
 			compatible = "amlogic, ion_dev";
-			memory-region = <0x1c>;
+			memory-region = <0x1c &ion_fb_reserved>;
 		};
 
 		audiobus@0xff642000 {
@@ -3167,6 +3167,14 @@
 			size = <0x00 0x8000000>;
 			alignment = <0x00 0x400000>;
 			phandle = <0x1c>;
+		};
+
+		ion_fb_reserved:linux,ion-fb {
+			compatible = "amlogic, ion-fb-mem";
+			reusable;
+			/* 1920x1080x4x3 round up 4M align */
+			size = <0x0 0x1c00000>;
+			alignment = <0x0 0x400000>;
 		};
 
 		linux,di_cma {
