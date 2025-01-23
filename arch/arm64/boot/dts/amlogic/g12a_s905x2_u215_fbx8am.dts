@@ -2970,7 +2970,7 @@
 
 			vbmeta {
 				compatible = "android,vbmeta";
-				parts = "vbmeta,boot,system,vendor";
+				parts = "vbmeta,boot";
 				by_name_prefix = "/dev/block";
 			};
 		};
@@ -3164,7 +3164,7 @@
 		linux,ion-dev {
 			compatible = "shared-dma-pool";
 			reusable;
-			size = <0x00 0x8000000>;
+			size = <0x00 0x4c00000>;
 			alignment = <0x00 0x400000>;
 			phandle = <0x1c>;
 		};
@@ -3173,7 +3173,7 @@
 			compatible = "amlogic, ion-fb-mem";
 			reusable;
 			/* 1920x1080x4x3 round up 4M align */
-			size = <0x0 0x1c00000>;
+			size = <0x0 0x3400000>;
 			alignment = <0x0 0x400000>;
 		};
 
@@ -3219,7 +3219,7 @@
 
 	cma_shrinker {
 		compatible = "amlogic, cma-shrinker";
-		status = "okay";
+		status = "disabled";
 		adj = <0x00 0x64 0xc8 0xfa 0x384 0x3b6>;
 		free = <0x2000 0x3000 0x4000 0x6000 0x7000 0x8000>;
 	};
@@ -3432,25 +3432,12 @@
 		status = "okay";
 		scan_period = <0x14>;
 		key_num = <0x01>;
-		key_name = "NES_RESET_CLICK";
-		key_code = <0x281>;
+		key_name = "bt_pair";
+		key_code = <218>;
 		key-gpios = <0x66 0x03 0x00>;
 		interrupts = <0x00 0x46 0x01 0x00 0x47 0x02>;
 		interrupt-names = "irq_keyup\0irq_keydown";
 		detect_mode = <0x01>;
-	};
-
-	adc_keypad {
-		compatible = "amlogic, adc_keypad";
-		status = "okay";
-		key_name = "vol-\0vol+\0power";
-		key_num = <0x03>;
-		io-channels = <0x73 0x00>;
-		io-channel-names = "key-chan-0";
-		key_chan = <0x00 0x00 0x00>;
-		key_code = <0x72 0x73 0x74>;
-		key_val = <0x276 0x38e 0x14>;
-		key_tolerance = <0x28 0x28 0x28>;
 	};
 
 	unifykey {
