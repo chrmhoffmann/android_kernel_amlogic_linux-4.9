@@ -17,8 +17,8 @@
 
 /dts-v1/;
 
-#include "mesong12a.dtsi"
-#include "partition_mbox_dynamic_deadpool.dtsi"
+#include "mesong12a_nicepool.dtsi"
+#include "partition_mbox_normal_dynamic_nicepool.dtsi"
 
 / {
 	model = "Amlogic";
@@ -162,12 +162,12 @@
 
 	amlogic_battery:dummy-battery {
 		compatible = "amlogic, dummy-battery";
-		status = "disabled";
+		status = "okay";
 	};
 
 	amlogic_charger:dummy-charger {
 		compatible = "amlogic, dummy-charger";
-		status = "disabled";
+		status = "okay";
 	};
 
 	gpioleds {
@@ -469,6 +469,19 @@
 			0 71 2>;
 		interrupt-names = "irq_keyup", "irq_keydown";
 		detect_mode = <1>;/*0:polling mode, 1:irq mode*/
+	};
+
+	adc_keypad {
+		compatible = "amlogic, adc_keypad";
+		status = "okay";
+		key_name = "vol-", "vol+", "power";
+		key_num = <3>;
+		io-channels = <&saradc SARADC_CH0>;
+		io-channel-names = "key-chan-0";
+		key_chan = <SARADC_CH0 SARADC_CH0 SARADC_CH0>;
+		key_code = <114 115 116>;
+		key_val = <630 910 20>; //val=voltage/1800mV*1023
+		key_tolerance = <40 40 40>;
 	};
 
 	unifykey{
